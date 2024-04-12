@@ -1,6 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const userRoutes = require('./routes/users');
+const shopRoutes = require('./routes/shop');
+const productRoutes = require('./routes/products');
+
+
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -14,24 +19,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 //     res.send('<h1>Hello Express JS!</h1>');
 // });
 
-app.get('/users',(req, res) => {
-    console.log('middleware 2');
-    res.send('<h1>Users List</h1>');
-});
+app.use(userRoutes);
+app.use(shopRoutes);
+app.use(productRoutes);
 
-app.get('/add-users',(req, res) => {
-    console.log('middleware 3');
-    res.send('<form action="create-user" method="POST"><input type="text" name="fullname"><input type="submit" name="Add"></form>');
-});
-
-app.post('/create-user', (req,res) => {
-    console.log(req.body);
-    res.redirect('/');
+app.use((req, res, next) => {
+    res.status(404).send('<h1>Page Not Found</h1>');
 })
-
-app.get('/',(req, res) => {
-    console.log('middleware 1');
-    res.send('<h1>Hello Express JS!</h1>');
-});
 
 app.listen(3000);
