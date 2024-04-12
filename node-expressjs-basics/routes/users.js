@@ -8,15 +8,15 @@ router.get('/users',(req, res) => {
 });
 
 
-router.get('/add-users',(req, res) => {
+router.get('/add-user',(req, res) => {
     console.log('middleware 3');
-    res.send('<form action="create-user" method="POST"><input type="text" name="fullname"><input type="submit" name="Add"></form>');
+    res.send('<form action="/admin/add-user" method="POST"><input type="text" name="fullname"><input type="submit" name="Add"></form>');
 });
 
 
-router.post('/create-user', (req,res) => {
+router.post('/add-user', (req,res) => {
     console.log(req.body);
-    res.redirect('/users');
+    res.redirect('/admin/users');
 })
 
 module.exports = router
