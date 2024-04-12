@@ -2,7 +2,7 @@ const fs = require('fs');
 const requestHandler = (req,res) => {
     const url = req.url;
     const method = req.method;
-    console.log(url, method);
+    // console.log(url, method);
     if(url === '/')
     {
         res.setHeader('Content-Type', 'text/html');
